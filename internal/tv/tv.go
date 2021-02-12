@@ -15,13 +15,12 @@ var (
 	}
 )
 
-func New(name string, ID uint64, irserialport *serial.Port) (*accessory.Television, error) {
+func New(irserialport *serial.Port) (*accessory.Accessory, error) {
 	info := accessory.Info{
-		Name:         name,
+		Name:         "Livingroom TV",
 		SerialNumber: "ERIKA-TV-01",
 		Manufacturer: "Erika Home",
 		Model:        "",
-		ID:           ID,
 	}
 	ac := accessory.NewTelevision(info)
 	ac.Television.Active.OnValueRemoteUpdate(func(i int) {
@@ -33,5 +32,5 @@ func New(name string, ID uint64, irserialport *serial.Port) (*accessory.Televisi
 		fmt.Println("tvkey", i)
 
 	})
-	return ac, nil
+	return ac.Accessory, nil
 }

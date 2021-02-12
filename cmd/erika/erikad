@@ -1,0 +1,44 @@
+#!/bin/bash
+# chkconfig: 2345 20 80
+# description: Description comes here....
+
+# Source function library.
+
+start() {
+    PATH=$PATH:$HOME/.erika/bin
+    mkdir -p $HOME/.erika
+    touch $HOME/.erika/app.log
+    touch $HOME/.erika/error.log
+    echo "start erika background"
+    /usr/sbin/start-stop-daemon --start --no-close -b -d $HOME --exec ~/.erika/bin/erika
+}
+
+stop() {
+    /usr/sbin/start-stop-daemon --stop --exec ~/.erika/bin/erika
+    kill -9 `pidof erika`
+}
+
+case "$1" in
+    start)
+       start
+       ;;
+    stop)
+       stop
+       ;;
+    restart)
+       stop
+       start
+       ;;
+    status)
+       # code to check status of app comes here
+       # example: status program_name
+       echo "====== app.log ======"
+       tail -n 10 $HOME/.erika/app.log
+       echo "====== error.log ======"
+       tail -n 10 $HOME/.erika/error.log
+       ;;
+    *)
+       echo "Usage: $0 {start|stop|status|restart}"
+esac
+
+exit 0

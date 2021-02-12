@@ -20,3 +20,7 @@ var homedir = initHomedir()
 func ApplicationDir() string {
 	return path.Join(homedir, ".erika")
 }
+
+func OpenFile(filename string, mode int) (*os.File, error) {
+	return os.OpenFile(path.Join(ApplicationDir(), filename), mode, 0755)
+}

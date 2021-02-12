@@ -12,11 +12,10 @@
 #include <IRtext.h>
 #include <IRutils.h>
 
-#define SERVER_IP "192.168.1.100"
 
 #ifndef STASSID
-#define STASSID "69-665.timecapsule.n"
-#define STAPSK  "kuytokedokisud"
+#define STASSID ""
+#define STAPSK  ""
 #endif
 
 
@@ -68,8 +67,8 @@ void setup() {
     Serial.println("MDNS responder started");
   }
 
-  server.on("/living-room/ac/on", handleLivingRoomACON);
-  server.on("/living-room/ac/off", handleLivingRoomACOFF);
+  server.on("/ac/on", handleLivingRoomACON);
+  server.on("/ac/off", handleLivingRoomACOFF);
   
   irsend.begin();
   server.begin();

@@ -8,4 +8,4 @@ rsync -avz ./dist/erika pi@192.168.1.55:/home/pi/.erika/bin/erika
 ssh pi@192.168.1.55 "/bin/bash -c 'chmod +x /home/pi/.erika/bin/erika'"
 
 echo "running erika...."
-ssh pi@192.168.1.55 '/bin/bash -c "kill -9 `pidof erika` && /home/pi/.erika/bin/erika"'
+ssh pi@192.168.1.55 "/etc/init.d/erikad restart"
